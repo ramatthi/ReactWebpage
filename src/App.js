@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import { useEffect } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const location = useLocation();
+
+    useEffect(() => {
+        // Update the body class based on the route
+        if (location.pathname === '/') {
+            document.body.classList.add('login-background');
+        } else {
+            document.body.classList.remove('login-background');
+        }
+    }, [location]);
+
+    return (
+        <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Login />} />
+        </Routes>
+      
+    );
 }
 
-export default App;
+export default function WrappedApp() {
+    return (
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    );
+}
