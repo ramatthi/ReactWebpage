@@ -29,9 +29,9 @@ const Login = () => {
                 alert("Email does not exist");
             } else if (res.data === "Login Success") {
                 navigate('/home');
-                window.alert('Successfully logged in');
+                
             } else {
-                alert("Incorrect Email or Password");
+                alert("Incorrect Password");
             }
         } catch (err) {
             alert(err);
